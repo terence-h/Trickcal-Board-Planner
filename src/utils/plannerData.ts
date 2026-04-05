@@ -54,6 +54,7 @@ export function cloneBoards(boards: BoardData[]): BoardData[] {
     id: board.id,
     name: board.name,
     sort: { ...board.sort },
+    hideCompletedCharacters: board.hideCompletedCharacters,
     rows: board.rows.map((row) => ({
       name: row.name,
       stats: { ...row.stats },
@@ -96,6 +97,7 @@ export function normalizePlannerData(
       id: templateBoard.id,
       name: templateBoard.name,
       sort: normalizeSortState(incomingBoard?.sort ?? templateBoard.sort),
+      hideCompletedCharacters: incomingBoard?.hideCompletedCharacters === true,
       rows: templateBoard.rows.map((templateRow) => {
         const incomingRow = incomingRowMap.get(templateRow.name)
         const incomingStats = asRecord(incomingRow?.stats) ?? {}

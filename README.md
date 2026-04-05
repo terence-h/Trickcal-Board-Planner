@@ -7,7 +7,7 @@ Hosted in Cloudflare Pages: [https://trickcal-board-planner.pages.dev/](https://
 ## Features
 
 - No account needed
-- Your board data, sorting choices, and theme setting are saved in your browser. You can easily export or import them as a JSON file.
+- Your board data, sorting choices, board preferences, and theme setting are saved in your browser. You can easily export or import them as a JSON file.
 - Includes a Changelog page populated from `/src/data/changelog.csv`, sorted latest-to-oldest by date (`DD MMM YYYY`), with `[*]` markers rendered as unordered list items.
 
 ## Data behavior
@@ -18,7 +18,7 @@ Hosted in Cloudflare Pages: [https://trickcal-board-planner.pages.dev/](https://
 - If localStorage already contains valid planner data, that data is used instead
 - Summaries recalculate automatically whenever checkboxes are toggled
 - Table rows are populated using CSV templates located in `/src/data/board_x.csv`
-- A single JSON payload in localStorage stores all board data, theme setting, and sorting preferences, with support for JSON import and export.
+- A single JSON payload in localStorage stores all board data, theme setting, sorting preferences, and filters per board, with support for JSON import and export.
 
 ## Development
 

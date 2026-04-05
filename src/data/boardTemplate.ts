@@ -67,6 +67,7 @@ export function createInitialBoardsFromTemplate(): BoardData[] {
     id: board.id,
     name: board.name,
     sort: { ...DEFAULT_SORT_STATE },
+    hideCompletedCharacters: false,
     rows: board.rows.map((row) => ({
       name: row.name,
       stats: { ...row.stats },

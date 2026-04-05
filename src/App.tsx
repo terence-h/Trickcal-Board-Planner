@@ -156,6 +156,7 @@ interface BoardPageProps {
   board: BoardData
   sortState: SortState
   onSortChange: (boardId: string, nextSort: SortState) => void
+  onHideCompletedChange: (boardId: string, nextHideCompletedCharacters: boolean) => void
   onToggle: (
     boardId: string,
     characterName: string,
@@ -198,7 +199,18 @@ function compareRows(a: BoardRow, b: BoardRow, sortState: SortState): number {
   return nameCompare
 }
 
-function BoardPage({ board, sortState, onSortChange, onToggle }: BoardPageProps) {
+function isRowFullyCompleted(row: BoardRow): boolean {
+  const statValues = Object.values(row.stats)
+  return statValues.length > 0 && statValues.every((value) => value === true)
+}
+
+function BoardPage({
+  board,
+  sortState,
+  onSortChange,
+  onHideCompletedChange,
+  onToggle,
+}: BoardPageProps) {
   const summary = calculateBoardSummary(board)
 
   const sortedRows = useMemo(() => {
@@ -206,6 +218,13 @@ function BoardPage({ board, sortState, onSortChange, onToggle }: BoardPageProps)
     nextRows.sort((a, b) => compareRows(a, b, sortState))
     return nextRows
   }, [board.rows, sortState])
+
+  const visibleRows = useMemo(() => {
+    if (!board.hideCompletedCharacters) {
+      return sortedRows
+    }
+    return sortedRows.filter((row) => !isRowFullyCompleted(row))
+  }, [board.hideCompletedCharacters, sortedRows])
 
   const handleSort = (key: SortKey) => {
     if (sortState.key === key) {
@@ -251,6 +270,16 @@ function BoardPage({ board, sortState, onSortChange, onToggle }: BoardPageProps)
         ))}
       </div>
 
+      <label className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+        <input
+          type="checkbox"
+          checked={board.hideCompletedCharacters}
+          onChange={(event) => onHideCompletedChange(board.id, event.target.checked)}
+          className="h-4 w-4 accent-sky-600"
+        />
+        Hide completed characters
+      </label>
+
       <div className="rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900">
         <div className="overflow-x-auto">
           <table className="min-w-full border-separate border-spacing-0 text-sm">
@@ -288,7 +317,7 @@ function BoardPage({ board, sortState, onSortChange, onToggle }: BoardPageProps)
               </tr>
             </thead>
             <tbody>
-              {sortedRows.map((row) => (
+              {visibleRows.map((row) => (
                 <tr key={row.name}>
                   <th className="whitespace-nowrap border-t border-slate-200 px-4 py-3 text-left font-medium text-slate-800 dark:border-slate-700 dark:text-slate-100">
                     {row.name}
@@ -455,6 +484,23 @@ function App() {
     }))
   }
 
+  const handleHideCompletedChange = (
+    boardId: string,
+    nextHideCompletedCharacters: boolean,
+  ) => {
+    setPlannerData((prev) => ({
+      ...prev,
+      boards: prev.boards.map((board) =>
+        board.id === boardId
+          ? {
+              ...board,
+              hideCompletedCharacters: nextHideCompletedCharacters,
+            }
+          : board,
+      ),
+    }))
+  }
+
   const handleExportJson = () => {
     const blob = new Blob([JSON.stringify(plannerData, null, 2)], {
       type: 'application/json',
@@ -583,6 +629,7 @@ function App() {
                   board={board}
                   sortState={board.sort}
                   onSortChange={handleSortChange}
+                  onHideCompletedChange={handleHideCompletedChange}
                   onToggle={handleToggleStat}
                 />
               }

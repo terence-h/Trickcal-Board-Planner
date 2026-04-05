@@ -37,6 +37,7 @@ export interface BoardData {
   id: string
   name: string
   sort: SortState
+  hideCompletedCharacters: boolean
   rows: CharacterEntry[]
 }
 

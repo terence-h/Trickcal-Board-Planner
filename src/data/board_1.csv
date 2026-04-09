@@ -1,4 +1,4 @@
-Total:,0/25,0/26,0/25,0/27,0/27
+Total:,0/26,0/26,0/26,0/27,0/27
 Character Name,ATK %,HP%,DEF %,Crit Hit & DMG %,Crit Hit & DMG RES %
 Alice,,FALSE,,FALSE,
 Allet,,,,FALSE,FALSE
@@ -55,6 +55,7 @@ Shaydi,FALSE,,FALSE,,
 Shoupan,,,,FALSE,FALSE
 Silphir,,FALSE,,FALSE,
 Sist,,,,FALSE,FALSE
+Snorky,FALSE,,FALSE,,
 Speaki,FALSE,,FALSE,,
 Sylla,FALSE,FALSE,,,
 Taida,FALSE,FALSE,,,

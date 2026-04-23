@@ -270,12 +270,12 @@ function BoardPage({
         ))}
       </div>
 
-      <label className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+      <label className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:cursor-pointer">
         <input
           type="checkbox"
           checked={board.hideCompletedCharacters}
           onChange={(event) => onHideCompletedChange(board.id, event.target.checked)}
-          className="h-4 w-4 accent-sky-600"
+          className="h-4 w-4 accent-sky-600 hover:cursor-pointer"
         />
         Hide completed characters
       </label>
@@ -289,7 +289,7 @@ function BoardPage({
                   <button
                     type="button"
                     onClick={() => handleSort('name')}
-                    className="inline-flex items-center gap-1 hover:text-sky-600 dark:hover:text-sky-400"
+                    className="inline-flex items-center gap-1 hover:text-sky-600 dark:hover:text-sky-400 hover:cursor-pointer"
                   >
                     Character Name
                     <span aria-hidden="true" className="text-xs">
@@ -305,7 +305,7 @@ function BoardPage({
                     <button
                       type="button"
                       onClick={() => handleSort(key)}
-                      className="inline-flex items-center justify-center gap-1 hover:text-sky-600 dark:hover:text-sky-400"
+                      className="inline-flex items-center justify-center gap-1 hover:text-sky-600 dark:hover:text-sky-400 hover:cursor-pointer"
                     >
                       {STAT_LABELS[key]}
                       <span aria-hidden="true" className="text-xs">
@@ -346,7 +346,7 @@ function BoardPage({
                           onChange={(event) =>
                             onToggle(board.id, row.name, key, event.target.checked)
                           }
-                          className="h-4 w-4 accent-sky-600"
+                          className="h-4 w-4 accent-sky-600 hover:cursor-pointer"
                           aria-label={`${row.name} ${STAT_LABELS[key]}`}
                         />
                       </td>
@@ -579,21 +579,21 @@ function App() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800 hover:cursor-pointer"
             >
               {plannerData.theme === 'dark' ? 'Switch to Light' : 'Switch to Dark'}
             </button>
             <button
               type="button"
               onClick={handleExportJson}
-              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800 hover:cursor-pointer"
             >
               Export JSON
             </button>
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+              className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800 hover:cursor-pointer"
             >
               Import JSON
             </button>
